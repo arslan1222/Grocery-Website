@@ -169,10 +169,10 @@ export const footerLinks = [
   {
     title: "Follow Us",
     links: [
-      { text: "Instagram", url: "#" },
-      { text: "Twitter", url: "#" },
-      { text: "Facebook", url: "#" },
-      { text: "YouTube", url: "#" },
+      { text: "WhatsApp", url: "https://wa.me/923217077229" },
+      { text: "Facebook", url: "https://web.facebook.com/profile.php?id=100066694849448" },
+      { text: "LinkedIn", url: "https://www.linkedin.com/in/arslan-haider-a0b297257/" },
+      { text: "GitHub", url: "https://github.com/arslan1222" },
     ],
   },
 ];
