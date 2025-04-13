@@ -1,0 +1,24 @@
+import "dotenv/config"
+import express from "express";
+import cors from "cors"
+import cookieParser from "cookie-parser";
+
+const app = express();
+
+const PORT = process.env.PORT || 3000;
+
+// Allow multiple origins
+const allowedOrigins = ['http://localhost:5173']
+
+app.use(cors({origin: allowedOrigins, credentials: true})); // Allow to acces the backend
+app.use(cookieParser());
+app.use(express.json());
+
+app.get("/", (req, res)=>{
+    res.send("I am root");
+})
+
+app.listen(PORT, ()=>{
+    console.log(`Server is running at ${PORT}`);
+    
+})
