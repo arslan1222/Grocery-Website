@@ -2,17 +2,26 @@ import "dotenv/config"
 import express from "express";
 import cors from "cors"
 import cookieParser from "cookie-parser";
+import connection from "./configs/mongodb.js";
+import userRouter from "./routes/user.route.js";
+
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+// Databse Connection
+connection()
+
 // Allow multiple origins
-const allowedOrigins = ['http://localhost:5173']
+const allowedOrigins = ['http://localhost:5173'];
 
 app.use(cors({origin: allowedOrigins, credentials: true})); // Allow to acces the backend
 app.use(cookieParser());
 app.use(express.json());
+
+// Api Endpoints
+app.use("/api/user", userRouter);
 
 app.get("/", (req, res)=>{
     res.send("I am root");
