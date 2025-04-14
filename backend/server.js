@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import connection from "./configs/mongodb.js";
 import userRouter from "./routes/user.route.js";
 import sellerRouter from "./routes/seller.route.js";
+import connectCloudinary from "./configs/cloudinary.js";
+import productRouter from "./routes/product.route.js";
 
 
 const app = express();
@@ -12,7 +14,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Databse Connection
-connection()
+await connection();
+await connectCloudinary();
 
 // Allow multiple origins
 const allowedOrigins = ['http://localhost:5173'];
@@ -23,7 +26,8 @@ app.use(express.json());
 
 // Api Endpoints
 app.use("/api/user", userRouter);
-app.use("/api/seller", sellerRouter)
+app.use("/api/seller", sellerRouter);
+app.use("/api/product", productRouter);
 
 app.get("/", (req, res)=>{
     res.send("I am root");
