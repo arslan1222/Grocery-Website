@@ -4,6 +4,7 @@ import cors from "cors"
 import cookieParser from "cookie-parser";
 import connection from "./configs/mongodb.js";
 import userRouter from "./routes/user.route.js";
+import sellerRouter from "./routes/seller.route.js";
 
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(express.json());
 
 // Api Endpoints
 app.use("/api/user", userRouter);
+app.use("/api/seller", sellerRouter)
 
 app.get("/", (req, res)=>{
     res.send("I am root");
