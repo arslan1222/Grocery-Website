@@ -7,6 +7,9 @@ import userRouter from "./routes/user.route.js";
 import sellerRouter from "./routes/seller.route.js";
 import connectCloudinary from "./configs/cloudinary.js";
 import productRouter from "./routes/product.route.js";
+import cartRouter from "./routes/cart.route.js";
+import addressRouter from "./routes/address.route.js";
+import orderRouer from "./routes/order.route.js";
 
 
 const app = express();
@@ -28,6 +31,9 @@ app.use(express.json());
 app.use("/api/user", userRouter);
 app.use("/api/seller", sellerRouter);
 app.use("/api/product", productRouter);
+app.use("/api/cart", cartRouter);
+app.use("/api/address", addressRouter);
+app.use("/api/order", orderRouer);
 
 app.get("/", (req, res)=>{
     res.send("I am root");
