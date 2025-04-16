@@ -2,25 +2,70 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { dummyProducts } from "../assets/assets";
 import toast from "react-hot-toast";
+import axios from "axios";
 
+axios.defaults.withCredentials = true;
+// axios.defaults.baseURL = import.meta.VITE_BACKEND_URI;
 
 export const AppContext = createContext();
 
 export const AppContextProvider = ({children}) => {
 
     const currency = '$';
+    const backend = "http://localhost:8000";
 
     const navigate = useNavigate();
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(false);
     const [isSeller, setIsSeller] = useState(false);
     const [showUserLogin, setShowUserLogin] = useState(false);
     const [products, setProducts] = useState([]);
     const [cartItems, setCartItems] = useState({});
     const [searchQuery, setSearchQuery] = useState([]);
 
+    const fetchSeller = async() => {
+        try {
+            const {data} = await axios.get(backend + "/api/seller/is-auth");
+
+        if(data.success) {
+            setIsSeller(true);
+        } else {
+            setIsSeller(false)
+        }
+        } catch (error) {
+            setIsSeller(false)
+        }
+    }
+
+    const fetchUser = async() => {
+        try {
+            const {data} = await axios.get(backend + "/api/user/is-auth");
+
+        if(data.success) {
+            setUser(true);
+        } else {
+            setUser(false)
+        }
+        } catch (error) {
+            setUser(false)
+        }
+    }
+
 
     const fetchProducts = async () => {
-        setProducts(dummyProducts);
+
+        try {
+            const { data } = await axios.get(backend + "/api/product/list");
+            console.log(data);
+            
+
+            if(data.success) {
+                setProducts(data.products);
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
     }
 
     // Add products to cart
@@ -90,6 +135,8 @@ export const AppContextProvider = ({children}) => {
 
     useEffect(()=>{
         fetchProducts();
+        fetchSeller();
+        fetchUser();
     }, [])
 
     const value = {
@@ -99,6 +146,7 @@ export const AppContextProvider = ({children}) => {
         addToCart, updateCartItems, removeFromCart,
         searchQuery, setSearchQuery,
         getCartCounts, getCartAmounts,
+        axios, backend, fetchProducts
     }
 
     return <AppContext.Provider value={value}>
