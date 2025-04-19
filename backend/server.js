@@ -21,7 +21,7 @@ await connection();
 await connectCloudinary();
 
 // Allow multiple origins
-const allowedOrigins = ['http://localhost:5173'];
+const allowedOrigins = ['https://grocery-your-need.onrender.com'];
 
 app.use(cors({origin: allowedOrigins, credentials: true})); // Allow to acces the backend
 app.use(cookieParser());
