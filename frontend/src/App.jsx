@@ -17,6 +17,7 @@ import SellerLayout from './Pages/Seller/SellerLayout'
 import AddProducts from './Pages/Seller/AddProducts'
 import ProductsList from './Pages/Seller/ProductsList'
 import Orders from './Pages/Seller/Orders'
+import Contact from './Pages/Contact'
 
 const App = () => {
 
@@ -39,6 +40,8 @@ const App = () => {
           <Route path='/cart' element={<Cart />}/>
           <Route path='/add-address' element={<AddAddress />}/>
           <Route path='/my-orders' element={<MyOrders />}/>
+          <Route path='/contact' element={<Contact />}/>
+
           <Route path='/seller' element={isSeller ? <SellerLayout /> : <SellerLogin />}>
             <Route index element={isSeller ? <AddProducts /> : null} />
             <Route path='product-list' element={<ProductsList />} />

@@ -47,8 +47,8 @@ const Navbar = () => {
                     Login
                 </button>): (
                     <div className='relative group'>
-                        <img className='w-10' src={assets.profile_icon} alt="" />
-                        <ul className='hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200 py-2.5 w-30 rounded-md text-sm z-40'>
+                        <img className='w-10 h-10 rounded-full' src={assets.profile_icon} alt="" />
+                        <ul className='hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200 py-2.5 px-3 min-w-max rounded-md text-sm z-40'>
                             <li onClick={()=> navigate('/my-orders')} className='p-1.5 w-full pl-3 hover:bg-primary/10 cursor-pointer'>My Orders</li>
                             <li onClick={lougout} className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer'>Logout</li>
                         </ul>

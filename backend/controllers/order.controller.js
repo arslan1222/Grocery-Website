@@ -2,6 +2,7 @@
 
 // Place Oder
 
+import mongoose from "mongoose";
 import Order from "../models/order.model.js";
 import Product from "../models/product.model.js";
 
@@ -28,7 +29,7 @@ export const placeOderCOD = async (req, res) => {
             userId,
             items,
             amount,
-            address,
+            address: new mongoose.Types.ObjectId(address),
             paymentType: "COD",
         });
 
@@ -45,17 +46,21 @@ export const placeOderCOD = async (req, res) => {
 
 // Get Orders by User ID
 
-export const getUserOrder = async (req, res) =>{
-
+export const getUserOrder = async (req, res) => {
     try {
-        const {userId} = req.bosy;
+        const { userId } = req.query; // Change from req.body to req.query
+
+        
+        
         const orders = await Order.find({
             userId,
             $or: [{paymentType: "COD"}, {isPaid: true}]
         }).populate("items.product address").sort({createdAt: -1});
-        res.json({success: true, orders});
+
+        
+        res.json({success: true, orders: orders});
     } catch (error) {
-        res.json({success: false, message: error.message})
+        res.json({success: false, message: error.message});
     }
 }
 

@@ -15,7 +15,7 @@ export const AppContextProvider = ({children}) => {
     const backend = "http://localhost:8000";
 
     const navigate = useNavigate();
-    const [user, setUser] = useState(false);
+    const [user, setUser] = useState(null);
     const [isSeller, setIsSeller] = useState(false);
     const [showUserLogin, setShowUserLogin] = useState(false);
     const [products, setProducts] = useState([]);
@@ -40,13 +40,16 @@ export const AppContextProvider = ({children}) => {
         try {
             const {data} = await axios.get(backend + "/api/user/is-auth");
 
-        if(data.success) {
-            setUser(true);
-        } else {
-            setUser(false)
-        }
+            console.log(data.success);
+            
+
+            if(data.success) {
+                setUser(data.user);
+                
+                setCartItems(data.user.cartItems);
+            } 
         } catch (error) {
-            setUser(false)
+            setUser(null)
         }
     }
 
@@ -55,8 +58,6 @@ export const AppContextProvider = ({children}) => {
 
         try {
             const { data } = await axios.get(backend + "/api/product/list");
-            console.log(data);
-            
 
             if(data.success) {
                 setProducts(data.products);
@@ -66,6 +67,8 @@ export const AppContextProvider = ({children}) => {
         } catch (error) {
             toast.error(error.message);
         }
+
+        // setProducts(dummyProducts)
     }
 
     // Add products to cart
@@ -137,7 +140,31 @@ export const AppContextProvider = ({children}) => {
         fetchProducts();
         fetchSeller();
         fetchUser();
-    }, [])
+    }, []);
+
+    useEffect(()=>{
+        const updateCart = async () => {
+            try {
+                const {data} = await axios.post(backend + "/api/cart/update", {
+                    userId: user._id,
+                    cartItems
+                });
+    
+                console.log(data.success);
+    
+                if(!data.success) {
+                    toast.error(data.message);
+                }
+            } catch (error) {
+                toast.error(error.message);
+            }
+        }
+    
+        if(user) {
+            updateCart();
+        }
+    }, [cartItems])
+    
 
     const value = {
         currency, navigate, user, setUser, isSeller, setIsSeller,
@@ -146,7 +173,7 @@ export const AppContextProvider = ({children}) => {
         addToCart, updateCartItems, removeFromCart,
         searchQuery, setSearchQuery,
         getCartCounts, getCartAmounts,
-        axios, backend, fetchProducts
+        axios, backend, fetchProducts, setCartItems
     }
 
     return <AppContext.Provider value={value}>

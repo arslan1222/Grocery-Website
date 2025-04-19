@@ -13,3 +13,7 @@
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
+
+.active {
+    color: #4fbf8b;
+}

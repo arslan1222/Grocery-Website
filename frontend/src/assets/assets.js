@@ -11,7 +11,7 @@ import refresh_icon from "./refresh_icon.svg";
 import product_list_icon from "./product_list_icon.svg";
 import order_icon from "./order_icon.svg";
 import upload_area from "./upload_area.png";
-import profile_icon from "./profile_icon.png";
+import profile_icon from "./p_icon.jpg";
 import menu_icon from "./menu_icon.svg";
 import delivery_truck_icon from "./delivery_truck_icon.svg";
 import leaf_icon from "./leaf_icon.svg";
@@ -69,6 +69,8 @@ import vanilla_muffins_image from "./vanilla_muffins_image.png";
 import quinoa_image from "./quinoa_image.png";
 import brown_rice_image from "./brown_rice_image.png";
 import barley_image from "./barley_image.png";
+import contact from "./contact.webp"
+
 
 export const assets = {
   logo,
@@ -98,6 +100,7 @@ export const assets = {
   bottom_banner_image_sm,
   add_address_iamge,
   box_icon,
+  contact,
 };
 
 export const categories = [
