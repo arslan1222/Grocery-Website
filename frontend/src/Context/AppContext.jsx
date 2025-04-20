@@ -12,11 +12,8 @@ export const AppContext = createContext();
 export const AppContextProvider = ({children}) => {
 
     const currency = 'Rs. ';
-<<<<<<< HEAD
+
     const backend = "https://grocery-you-need.onrender.com";
-=======
-    const backend = "http://localhost:8000";
->>>>>>> f4e9171 (Best Seller page resposiveness)
 
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
