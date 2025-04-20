@@ -69,13 +69,15 @@ const Navbar = () => {
             {/* Mobile Menu */}
             {
                 open && (
-                    <div onClick={()=> setOpen(false)} className={`${open ? 'flex' : 'hidden'} absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}>
+                    <div onClick={()=> setOpen(false)} className={`${
+                        open ? "fixed w-[70%]" : "h-0 w-0"
+                      } flex flex-col items-start justify-start md:hidden right-0 top-0 px-6 py-16 gap-4 bottom-0 z-20 overflow-hidden bg-white transition-all duration-300`}>
                 <NavLink to='/' onClick={() => setOpen(false)} >Home</NavLink>
                 <NavLink to='/products' onClick={() => setOpen(false)} >All products</NavLink>
                 { user && 
-                    <NavLink to='/products' onClick={() => setOpen(false)} >My Orders</NavLink>
+                    <NavLink to='/my-orders' onClick={() => setOpen(false)} >My Orders</NavLink>
                 }
-                <NavLink to='/' onClick={() => setOpen(false)} >Contact</NavLink>
+                <NavLink to='/contact' onClick={() => setOpen(false)} >Contact</NavLink>
 
                 {!user ? (
                     <button onClick={()=> {
