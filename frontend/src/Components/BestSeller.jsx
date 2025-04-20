@@ -15,6 +15,7 @@ const BestSeller = () => {
             <ProductCard key={index} product={product}/>
           ))}
           
+          
         </div>
     </div>
   )
